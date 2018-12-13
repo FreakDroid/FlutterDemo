@@ -52,6 +52,65 @@ class _State extends State<MyApp> {
     });
   }
 
+  bool _valueBool = false;
+  bool _valueBool2 = false;
+
+  void _onChangeBool1(bool value){
+    setState(() {
+      _valueBool = value;
+    });
+  }
+
+  void _onChangeBool2(bool value){
+    setState(() {
+      _valueBool2 = value;
+    });
+  }
+
+  int _valueRadio = 0;
+  int _valueRadio2 = 0;
+
+  void _setValueRadio(int value){
+    setState(() {
+      _valueRadio = value;
+    });
+  }
+
+  void _setValueRadio2(int value){
+    setState(() {
+      _valueRadio2 = value;
+    });
+  }
+
+  Widget createRadios(){
+    List<Widget> list = [];
+
+    for(int i = 0;i < 3; i++){
+      list.add(new Radio(value: i, groupValue: _valueRadio, onChanged: _setValueRadio));
+    }
+
+    Column colum = new Column(children: list);
+    return colum;
+  }
+
+  Widget createRadiosTitle(){
+    List<Widget> list = [];
+
+    for(int i = 0;i < 3; i++){
+      list.add(new RadioListTile(
+          value: i,
+          groupValue: _valueRadio,
+          onChanged: _setValueRadio,
+          activeColor: Colors.green,
+          title: new Text('Item ${i}'),
+          subtitle: new Text('Item ${i}'),
+      ));
+    }
+
+    Column colum = new Column(children: list);
+    return colum;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -81,8 +140,16 @@ class _State extends State<MyApp> {
                 keyboardType: TextInputType.text,
                 onChanged: _onChange,
                 onSubmitted: _onSubmit,
-              )
-
+              ),
+              new Checkbox(value: _valueBool, onChanged: _onChangeBool1),
+              new CheckboxListTile(value: _valueBool2, onChanged: _onChangeBool2,
+                  title: new Text("Hello World"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  secondary: new Icon(Icons.archive),
+                  activeColor: Colors.red,
+              ),
+              createRadios(),
+              createRadiosTitle()
             ],
           ),
         ),
