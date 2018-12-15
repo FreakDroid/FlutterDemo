@@ -111,45 +111,68 @@ class _State extends State<MyApp> {
     return colum;
   }
 
+  double _myDoubleVar = 0.0;
+
+  void _setValue(double value){
+    setState(() {
+      _myDoubleVar = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Name Here'),
+        title: new Text('Testing Appbar'),
+        actions: <Widget>[
+          new IconButton(icon: new Icon(Icons.add), onPressed: _add),
+          new IconButton(icon: new Icon(Icons.remove), onPressed: _substract)
+        ],
       ),
       body: new Container(
         padding: new EdgeInsets.all(52.0),
         child: new Center(
           child: new Column(
             children: <Widget>[
-              new Text(_value),
-              new RaisedButton(onPressed: _onPressed, child: new Text('Click me :)')),
-              new RaisedButton(onPressed: _onPressed2, child: new Text('Click me :)')),
-              new IconButton(icon: new Icon(Icons.add), onPressed: _add),
-              new IconButton(icon: new Icon(Icons.remove), onPressed: _substract),
-              new Text(' The value is ${_number}'),
-              new TextField(
-                decoration: new InputDecoration(
-                  labelText: 'Halle',
-                  hintText: 'Type something',
-                  icon: new Icon(Icons.people)
+//              new Text(_value),
+//              new RaisedButton(onPressed: _onPressed, child: new Text('Click me :)')),
+//              new RaisedButton(onPressed: _onPressed2, child: new Text('Click me :)')),
+//              new IconButton(icon: new Icon(Icons.add), onPressed: _add),
+//              new IconButton(icon: new Icon(Icons.remove), onPressed: _substract),
+//              new Text(' The value is ${_number}'),
+//              new TextField(
+//                decoration: new InputDecoration(
+//                  labelText: 'Halle',
+//                  hintText: 'Type something',
+//                  icon: new Icon(Icons.people)
+//                ),
+//                autocorrect: true,
+//                autofocus: true,
+//                keyboardType: TextInputType.text,
+//                onChanged: _onChange,
+//                onSubmitted: _onSubmit,
+//              ),
+//              new Checkbox(value: _valueBool, onChanged: _onChangeBool1),
+//              new CheckboxListTile(value: _valueBool2, onChanged: _onChangeBool2,
+//                  title: new Text("Hello World"),
+//                  controlAffinity: ListTileControlAffinity.leading,
+//                  secondary: new Icon(Icons.archive),
+//                  activeColor: Colors.red,
+//              ),
+//              createRadios(),
+//              createRadiosTitle()
+                new Text("${_number}"),
+                new Switch(value: _valueBool, onChanged: _onChangeBool1),
+                new SwitchListTile(value: _valueBool2,
+                  onChanged: _onChangeBool2,
+                  title: new Text(
+                    "Hola Mundo",
+                    style: new TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                  ),
                 ),
-                autocorrect: true,
-                autofocus: true,
-                keyboardType: TextInputType.text,
-                onChanged: _onChange,
-                onSubmitted: _onSubmit,
-              ),
-              new Checkbox(value: _valueBool, onChanged: _onChangeBool1),
-              new CheckboxListTile(value: _valueBool2, onChanged: _onChangeBool2,
-                  title: new Text("Hello World"),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  secondary: new Icon(Icons.archive),
-                  activeColor: Colors.red,
-              ),
-              createRadios(),
-              createRadiosTitle()
+              new Text("${(_myDoubleVar * 100).round()} "),
+              new Slider(value: _myDoubleVar, onChanged: _setValue)
             ],
           ),
         ),
