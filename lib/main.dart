@@ -119,6 +119,24 @@ class _State extends State<MyApp> {
     });
   }
 
+  void _showButton(){
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context){
+          return new Container(
+              padding: new EdgeInsets.all(39.0),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Text('Some data here', style: new TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                  new RaisedButton(onPressed: () => Navigator.pop(context), child: new Text("Close"))
+                ],
+              ),
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -129,6 +147,21 @@ class _State extends State<MyApp> {
           new IconButton(icon: new Icon(Icons.add), onPressed: _add),
           new IconButton(icon: new Icon(Icons.remove), onPressed: _substract)
         ],
+      ),
+      floatingActionButton: new FloatingActionButton(onPressed: _onPressed2,
+        backgroundColor: Colors.red,
+        child: new Icon(Icons.timer),
+      ),
+      drawer: new Drawer(
+        child: new Container(
+          padding: new EdgeInsets.all(39.0),
+          child: new Column(
+            children: <Widget>[
+              new Text("This is my Drawer"),
+              new RaisedButton(onPressed: () => Navigator.pop(context), child: new Text("Close me"),)
+            ],
+          )
+        ),
       ),
       body: new Container(
         padding: new EdgeInsets.all(52.0),
@@ -172,7 +205,9 @@ class _State extends State<MyApp> {
                   ),
                 ),
               new Text("${(_myDoubleVar * 100).round()} "),
-              new Slider(value: _myDoubleVar, onChanged: _setValue)
+              new Slider(value: _myDoubleVar, onChanged: _setValue),
+              new Text("${_value}"),
+              new RaisedButton(onPressed: _showButton, child: new Text("Click me")),
             ],
           ),
         ),
